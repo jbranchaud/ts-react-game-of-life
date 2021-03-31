@@ -34,14 +34,32 @@ export const Game = () => {
     <div>
       <h1>Game of Life</h1>
       <h2>React + TypeScript (tsdx)</h2>
-      <div>
+      <div className="board space-y-2">
         {board.map((row, i) => {
           return (
-            <p key={i}>
+            <div className="row space-x-2" key={i}>
               {row.map((cell, j) => {
-                return <span key={j}>{cell === 'Alive' ? '@' : ' '}</span>;
+                return (
+                  <span
+                    className=""
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      ...(cell === 'Alive'
+                        ? {
+                            backgroundColor: `hsl(${(180 / 20) * i +
+                              (180 / 20) * j}deg 100% 50% / 1)`,
+                          }
+                        : {
+                            backgroundColor: `hsl(${(180 / 20) * i +
+                              (180 / 20) * j}deg 75% 50% / 0.25)`,
+                          }),
+                    }}
+                    key={j}
+                  />
+                );
               })}
-            </p>
+            </div>
           );
         })}
       </div>
