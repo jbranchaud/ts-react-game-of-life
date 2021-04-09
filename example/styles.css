@@ -1,0 +1,26 @@
+.space-x-2 > * + * {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-2 > * + * {
+  --tw-space-x-reverse: 0;
+  margin-bottom: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-top: calc(0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+}

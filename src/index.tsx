@@ -23,17 +23,48 @@ function useInterval(callback: Function, delay: number) {
   }, [delay]);
 }
 
-export const Game = () => {
-  const [board, setBoard] = React.useState(Board.generateBoard(20, 20));
+type boardStatus = 'paused' | 'running';
+
+function useBoardControls(
+  initialBoardGenerator: () => Board.Board,
+  initialStatus?: boardStatus
+): [Board.Board, boardStatus, Function, Function, Function] {
+  const [board, setBoard] = React.useState(initialBoardGenerator());
+  const [status, setStatus] = React.useState(initialStatus || 'paused');
 
   useInterval(() => {
-    setBoard(Board.advanceBoard(board));
-  }, 1000);
+    if (status === 'running') {
+      setBoard(Board.advanceBoard(board));
+    }
+  }, 1500);
+
+  const pause = () => setStatus('paused');
+  const start = () => setStatus('running');
+  const restart = () => setBoard(initialBoardGenerator());
+
+  return [board, status, pause, start, restart];
+}
+
+export const Game = () => {
+  const [board, status, pause, start, restart] = useBoardControls(() => {
+    return Board.generateBoard(20, 20);
+  });
 
   return (
-    <div>
+    <div className="space-y-2">
       <h1>Game of Life</h1>
       <h2>React + TypeScript (tsdx)</h2>
+      <div className="controls space-x-2">
+        <span>Status: {status}</span>
+        <button
+          onClick={() => {
+            status === 'running' ? pause() : start();
+          }}
+        >
+          {status === 'running' ? 'Pause' : 'Start'}
+        </button>
+        <button onClick={() => restart()}>Restart</button>
+      </div>
       <div className="board space-y-2">
         {board.map((row, i) => {
           return (
