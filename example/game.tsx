@@ -60,8 +60,15 @@ function useBoardControls(
   const restart = () => setBoard(initialBoardGenerator(width, height));
   const toggleCellState = (x: number, y: number) => {
     setBoard(prevBoard => {
-      prevBoard[y][x] = prevBoard[y][x] === 'Alive' ? 'Dead' : 'Alive';
-      return prevBoard;
+      return prevBoard.map((row, i) => {
+        return row.map((cell, j) => {
+          if (i === y && j === x) {
+            return cell === 'Alive' ? 'Dead' : 'Alive';
+          } else {
+            return cell;
+          }
+        });
+      });
     });
   };
 
