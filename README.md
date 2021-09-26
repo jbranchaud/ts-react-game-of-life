@@ -1,3 +1,13 @@
+# Game of Life in React and TypeScript
+
+This is a colorful take on Game of Life using TypeScript and React (via tsdx).
+
+The Game of Life logic is implemented as standalone TypeScript package. This is
+then demoed from the `/example` directory. You can jump into that directory,
+run `yarn start`, and then visit `localhost:1234` to see it in action.
+
+---
+
 # TSDX React User Guide
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
